@@ -1,0 +1,94 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108095601-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-108095601-1');
+    </script>
+
+    {% block chart %}{% endblock %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <style>
+      .bg-inverse {
+         background-color: #364a94!important;
+      }
+      .container {
+        margin-top: 6em;
+      }
+
+      #myChart {
+        margin-bottom: 20px;
+      }
+    </style>
+    <meta charset="utf-8">
+    {% if colegio %}
+    <meta name="description" content="Resultados de las Pruebas Saber 11 para {{ colegio|lower|truncatechars:75 }} de la ciudad de {{ colegio.nombremunicipio }}">
+    {% else %}
+    <meta name="description" content="Aquí se Muestran los Resultados de las Pruebas Saber 11 organizadas por el ICFES en los años 2016 y 2017">
+    {% endif %}
+    <meta name="keywords" content="ICFES, Pruebas Saber 11, Resultados 2016 2017">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      .card-block {background: lightblue;}
+      .card-header {background: lightblue;}
+    </style>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    
+	<!-- Static navbar -->
+    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="/">Educadatos.com</a>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resultados Saber 11</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="/saber2017/">Saber 11 2017</a>
+              <a class="dropdown-item" href="/saber2016/">Saber 11 2016</a>
+            </div>
+          </li>
+          <!--
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">MOOCs</a>
+          </li>
+          -->
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'saber2017:proc_colegio' %}" method="post">
+          {% csrf_token %}
+          {{ form.colegio }}
+          <!-- <input class="form-control mr-sm-2" type="text" placeholder="Buscar"> -->
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+      </div>
+    </nav>    
+
+    <div class="container">
+	{% block content%}
+	{% endblock %}
+    </div><!-- container -->
+    
+    <footer class="footer">
+        <div class="container text-center">
+            <small> Educadatos {% now "F Y" %}</small>
+        </div>
+    </footer>
+     <!-- Bootstrap core JavaScript and Others like Chart.js
+    ================================================== -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</body>
+</html>

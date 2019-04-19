@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}{{colegio.nombreinstitucion}}{% endblock %}
+{% block content %}
+ <h1 class="text-center">{{colegio.nombreinstitucion}} {% if colegio.enlace %}<span style="font-size: 0.5em"><a href="{{colegio.enlace}}">(Enlace para resultados 2016)</a></span>{% endif %}</h1>
+
+<canvas id="myChart" width="400" height="200"></canvas>
+
+<div class="card">
+  <div class="card-block">
+    <h4 class="card-title card-header">{{colegio.nombreinstitucion}}</h4>
+    <div class="row">
+      <div class="col-sm-6">
+        <p class="card-text">Municipio: {{colegio.nombremunicipio}}</p>
+        <p class="card-text">Naturaleza: {{colegio.naturaleza}}</p>
+        <p class="card-text">Calendario: {{colegio.calendario}}</p>
+        <p class="card-text">Evaluados: {{colegio.evaluados}}</p>
+      </div>
+      <div class="col-sm-6">
+        <p class="card-text">Puntaje Global: {{colegio.puntajeglobal | floatformat:"0"}}</p>
+        <p class="card-text">Periodo: {{colegio.periodo}}</p>
+        <p class="card-text">Jornada: {{colegio.jornada}}</p>
+        <p class="card-text">Código Institución: {{colegio.codinst}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+	var dattos = {{ datos | safe }};
+	var datta = dattos[0].fields;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<script async src="{% static 'js/visor.js' %}"></script>
+{% endblock %}
+

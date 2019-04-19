@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block chart %}
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Departamento');
+        data.addColumn('number', 'Evaluados');
+        data.addRows([
+          ['VALLE', 6856],
+          ['BOGOTÁ', 2527],
+          ['CUNDINAMARCA', 739],
+          ['ATLÁNTICO', 690],
+          ['OTROS', 2181]
+        ]);
+
+        // Set chart options
+        var options = {
+          'title':'Porcentaje de Estudiantes Evaluados por Departamento',
+          'width':400,
+          'height':300,
+          'is3D': true,             
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  
+{% endblock %}
+
+{% block title %}Pruebas Saber 11 2017: Análisis de Datos{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="display-4 text-center">Pruebas Saber 11 2017: Análisis de Datos </h1>
+        <div class="row">
+            <div class="col-sm-4">
+                <!--Div that will hold the pie chart-->
+                <div id="chart_div"></div>
+            </div>
+            <div class="col-sm-8">
+                <p class="lead">
+                  Aquí se muestran los resultados en forma gráfica los 
+                  resultados de las pruebas Saber 11 del Calendario B 
+                  en 2017. La mayor parte de los estudiantes evaluados
+                  se encuentran en el departamento del Valle. Entre los
+                  cien mejores colegios de acuerdo al puntaje global, hay
+                  37 de Bogotá, 18 del Valle, 13 de Cundinamarca, 8 del
+                  Atlántico. Antioquia, Bolívar y Caldas tienen 4 cada uno.
+                  Cauca, Risaralda y Santander tienen 3 cada uno y Quindio, Cesar
+                  y La Guajira 1 cada uno.
+                </p>
+                <p class="lead">
+                  El promedio de todos los colegios del Valle fue 288.
+                  En el Valle hay un total de 189 colegios repartidos en 10 municipios
+                  (Cartago, Buga, Jamundí, Candelaria, Pradera, El Cerrito,
+                  Roldanillo, Pamira, Cali y Yumbo).
+                  EL puntaje mayor lo obtuvo el Colegio Diana Oese de Cali (386).
+                </p>
+            </div>
+        </div><!-- row -->
+        <p class="lead">
+          En Bogotá hay 50 colegios del calendario B y el promedio total
+          fue de 243 y el Colegio La Colina obtuvo el mayor puntaje (378).
+        </p>
+        <p class="lead">
+         En Cundinamarca hay 27 colegios en 6 municipios (La Calera, 
+         Cota, Sopó, Tenjo, Cajicá, Chía). El promedio
+         fue 330 y el Colegio Tilata en La Calera tuvo el mayor puntaje (360).
+        </p>
+
+    </div> <!-- end of container -->
+{% endblock %}

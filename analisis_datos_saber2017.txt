@@ -1,0 +1,6 @@
+En el calendario B 350 (12993 estudiantes) colegios participaron en las pruebas. Los siguientes 
+departamentos están representados: La Guajira, Antioquia, Risaralda, 
+Magdalena, Santander, Nariño, Valle, Quindio, Atlántico, Cesar, Bolivar, 
+Córdoba, Cundinamarca, Cauca, Caldas y el Distrito Especial de Bogotá.
+Los colegios con menos estudiantes tienen 1 y el colegio con mayor número
+de estudiantes tiene 206 (Comfandi Prado, Cali)

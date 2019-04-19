@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}{{colegio.nombre}}{% endblock %}
+{% block content %}
+{% if colegio %}
+        <h1 class="text-center">{{colegio.nombreinstitucion}} {% if colegio.enlace %}<span style="font-size: 0.5em"><a href="{{colegio.enlace}}">(Enlace para resultados 2016)</a></span>{% endif %}</h1>
+        <div class="table-responsive">
+	<table class="table">
+		<tr>
+			<th>Ciudad</th>
+			<th>Evaluados</th>
+			<th>Naturaleza</th>
+			<th>Calendario</th>
+                        <th>Puntaje Global</th>
+		</tr>
+		<tr>
+			<td>{{colegio.nombremunicipio}}</td>
+			<td>{{colegio.evaluados}}</td>
+			<td>{{colegio.naturaleza}}</td>
+			<td>{{colegio.calendario}}</td>
+                        <td>{{colegio.puntajeglobal}}</td>
+		</tr>
+	</table>
+        </div> <!-- table responsive -->
+{% endif %}
+
+<canvas id="myChart" width="400" height="200"></canvas>
+
+</div>
+<script>
+	var dattos = {{ datos | safe }};
+	var datta = dattos[0].fields;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<script async src="{% static 'js/visor.js' %}"></script>
+{% endblock %}
+

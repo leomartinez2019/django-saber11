@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}{{encabezado}}{% endblock %}
+{% block content %}
+<h2>{{encabezado}}</h2>
+<ol class="list-group">
+    {% for elem in datos %}
+      <li class="list-group-item"><a href="{% url 'saber2016:detalle' elem.slug elem.pk %}">{{ forloop.counter }}. {{elem}} ({{elem.nombremunicipio}}). Puntaje Global: {{ elem.puntajeglobal|floatformat:"0" }}</a></li>
+    {% endfor %}
+</ol>
+{% endblock %}

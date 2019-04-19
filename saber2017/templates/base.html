@@ -1,0 +1,80 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <style>
+      .bg-inverse {
+         background-color: #364a94!important;
+      }
+      .container {
+        margin-top: 6em;
+      }
+    </style>
+    <meta charset="utf-8">
+    {% if title %}
+        <meta name="description" content="Resultados de las Pruebas Saber 11 para el colegio {{title}}">
+    {% else %}
+        <meta name="description" content="Muestra los resultados de las Pruebas Saber 11 organizadas por el ICFES en los años 2016 y 2017">
+    {% endif %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    
+	<!-- Static navbar -->
+    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="/">Educadatos</a>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resultados Saber</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Pruebas Saber 2016</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/saber2017/">Pruebas Saber 2017 <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/saber2016/">Pruebas Saber 2016</a>
+          </li>
+          <!--
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">MOOCs</a>
+          </li>
+          -->
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'saber2017:proc_colegio' %}" method="post">
+          {% csrf_token %}
+          {{ form.colegio }}
+          <!-- <input class="form-control mr-sm-2" type="text" placeholder="Buscar"> -->
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+      </div>
+    </nav>    
+
+    <div class="container">
+	{% block content%}
+	{% endblock %}
+    </div><!-- container -->
+    
+    <footer class="footer">
+        <div class="container text-center">
+            <small> Educadatos {% now "F Y" %}</small>
+        </div>
+    </footer>
+     <!-- Bootstrap core JavaScript and Others like Chart.js
+    ================================================== -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</body>
+</html>

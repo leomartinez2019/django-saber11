@@ -1,0 +1,11 @@
+myenv/pip-selfcheck.json
+saber2016/__pycache__/*
+saber2017/__pycache__/*
+__pycache__
+Educadatos/__pycache__/*
+myenv
+db.sqlite3
+formersaber
+.ipynb_checkpoints/
+*.ipynb
+mongo_atlas.py

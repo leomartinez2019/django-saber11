@@ -1,0 +1,55 @@
+{% extends 'miapp/base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block title %}
+{% if colegio%}
+  {{colegio.nombre}}
+{% else %}
+  buscar colegio pruebas saber 11 2015 icfes
+{% endif %}
+{% endblock %}
+{% block content %}
+{% if colegio %}
+        <h1 class="text-center">{{colegio.nombre}} {% if colegio.enlace %}<span style="font-size: 0.5em"><a href="{{colegio.enlace}}">(Enlace para resultados 2016)</a></span>{% endif %}</h1>
+        <div class="table-responsive">
+	<table class="table">
+		<tr>
+			<th>Ciudad</th>
+			<th>Evaluados</th>
+			<th>Naturaleza</th>
+			<th>Calendario</th>
+                        <th>Ranking</th>
+		</tr>
+		<tr>
+			<td>{{colegio.municipio}}</td>
+			<td>{{colegio.evaluados}}</td>
+			<td>{{colegio.naturaleza}}</td>
+			<td>{{colegio.calendario}}</td>
+                        <td>{{colegio.puesto}}</td>
+		</tr>
+	</table>
+        </div> <!-- end table responsive -->
+{% endif %}
+<div id="grafica"></div>
+{% if mensaje %}<h3>{{mensaje}}</h3>{% endif %}
+{% if not colegio %}
+<div class="row">
+  <div class="col-md-6 azul-claro">
+  <h1 class="text-center color-blanco">Buscar Resultados Individuales</h1>
+    <form action="" method='POST'>
+	{% csrf_token %}
+	{{form | crispy}}
+	<button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+  </div>
+</div>
+{% endif %}
+<script>
+	var dotado = {{data | safe}};
+	if (dotado != 0) {
+		var data = dotado[0].fields;
+	}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+<script async src="{% static 'js/visor.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}{{encabezado}}{% endblock %}
+{% block content %}
+{% if mensaje %}
+  {{ mensaje }}
+{% endif %}
+<h2>{{ titulo }}</h2>
+<ol class="list-group">
+    {% for elem in datos %}
+      <li class="list-group-item"><a href="{% url 'detalle' elem.slug elem.pk %}">{{elem}}, {{elem.nombremunicipio}} ({{elem.puntajeglobal}})</a></li>
+    {% endfor %}
+</ol>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}{{skool.nombre}}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <p>{{skool}}</p>
+        <p>{{skool.total}}</p>
+        <p>{{skool.clasificacion}}</p>
+    </div>
+{% endblock %}

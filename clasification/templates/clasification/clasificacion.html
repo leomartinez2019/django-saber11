@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Clasificación de los planteles del Año 2016{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="display-4 text-center">Pruebas Saber 11: Clasificación del Año 2016</h1>
+        <p class="lead">
+         Esta es la lista de los primeros 100 colegios
+        </p>
+        <ol>
+            {% for dato in datos %}
+                <li><a href="{% url 'clasification:detalle' dato.pk %}">{{dato.nombre}}</a></li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock %}
